@@ -31,7 +31,7 @@ module Heaven
 
         unless File.exist?(archive_path)
           log "Downloading #{archive_link} into #{archive_path}"
-          execute_and_log(["curl", "-sL", archive_link, "-o", archive_path])
+          execute_and_log(["curl", "--create-dirs", "-L", archive_link, "-o", archive_path])
         end
 
         unless Dir.exist?(unpacked_directory)
