@@ -9,7 +9,7 @@ services:
         build:
             context: .
         image: heaven/test
-        command: ["rake"]
+        command: ["rake db:setup default"]
         environment:
             RAILS_ENV: test
             REDIS_PROVIDER: REDIS_CONTAINER_URL
