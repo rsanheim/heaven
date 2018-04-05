@@ -1,5 +1,5 @@
-FROM ruby:2.3.1
-MAINTAINER emdentec ltd. <docker@emdentec.com>
+FROM ruby:2.3.6
+MAINTAINER rsanheim <rsanheim@gmail.com>
 
 RUN mkdir -p /root/.ssh
 
