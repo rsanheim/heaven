@@ -16,7 +16,5 @@ COPY . $WORK_DIR
 WORKDIR $WORK_DIR
 EXPOSE 80
 
-RUN ["gem", "install", "bundler"]
-
 ENTRYPOINT ["bundle", "exec"]
 CMD ["unicorn", "-p", "80", "-c", "config/unicorn.rb"]
