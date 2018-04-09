@@ -2,7 +2,7 @@ FROM ruby:2.3.6
 MAINTAINER rsanheim <rsanheim@gmail.com>
 
 RUN mkdir -p /root/.ssh
-COPY config/docker_profile /root/.ssh/.profile
+COPY config/docker_profile /root/.profile
 
 ENV WORK_DIR /usr/lib/heaven
 
