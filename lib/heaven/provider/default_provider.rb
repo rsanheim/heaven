@@ -33,7 +33,7 @@ module Heaven
       end
 
       def log(line)
-        Rails.logger.info "#{name}-#{guid}: #{line}"
+        Rails.logger.info "provider=#{self.class.name} ref=#{ref} #{name}-#{guid}: #{line}"
       end
 
       def gem_executable_path(name)
