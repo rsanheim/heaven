@@ -1,6 +1,32 @@
 require "spec_helper"
 
 describe "Heaven::Notifier::Default" do
+  context "chat_user" do
+    it "returns user from notify data from payload" do
+      data = {
+        "deployment" => {
+          "payload" => {
+            "notify" => {
+              "user_name" => "sarahconnor"
+            }
+          }
+        }
+      }
+      notifier = Heaven::Notifier::Default.new(data)
+      expect(notifier.chat_user).to eq("sarahconnor")
+    end
+
+    it "returns unknown chat user if payload is empty" do
+      data = { "deployment" => {
+        "payload" => {}
+        }
+      }
+      notifier = Heaven::Notifier::Default.new(data)
+      expect(notifier.chat_user).to eq("unknown")
+    end
+
+  end
+
   it "does not deliver changes unless an environment opt-in is present" do
     notifier = Heaven::Notifier::Default.new("{}")
 
