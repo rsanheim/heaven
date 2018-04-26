@@ -22,7 +22,7 @@ module Heaven
             :pretext => pending? ? output_message : " "
           }]
         }
-        options.merge!(channel: "#{chat_room}") # if chat_room
+        options.merge!(channel: "#{chat_room}") if chat_room
         slack_account.ping "", options
       end
 
