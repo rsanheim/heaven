@@ -105,7 +105,7 @@ module Heaven
       end
 
       def chat_room
-        deployment_payload["notify"]["room"]
+        deployment_payload["notify"] && deployment_payload["notify"]["room"]
       end
 
       def repo_name
