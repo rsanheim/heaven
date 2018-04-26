@@ -9,6 +9,7 @@ module Heaven
   module Notifier
     def self.for(payload)
       if slack?
+        Rails.logger.info "class=#{name} event=find_notifier provider=slack"
         ::Heaven::Notifier::Slack.new(payload)
       elsif hipchat?
         ::Heaven::Notifier::Hipchat.new(payload)
@@ -17,7 +18,7 @@ module Heaven
       elsif campfire?
         ::Heaven::Notifier::Campfire.new(payload)
       else
-        Rails.logger.warn "class=#{self.class.name} msg=no notifier configured"
+        Rails.logger.warn "class=#{name} event=find_notifier msg=no notifier configured"
       end
     end
 

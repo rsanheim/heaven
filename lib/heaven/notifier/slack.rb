@@ -8,7 +8,7 @@ module Heaven
         output_message   = ""
         filtered_message = slack_formatted(message)
 
-        Rails.logger.info "slack: #{filtered_message}"
+        Rails.logger.info "class=#{self.class.name} slack: #{filtered_message}"
         Rails.logger.info "message: #{message}"
 
         output_message << "##{deployment_number} - #{repo_name} / #{ref} / #{environment}"
