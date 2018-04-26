@@ -24,7 +24,7 @@ class Receiver
   end
 
   def log_inactive_repo
-    Rails.logger.warn "class=reciever event=#{event} repo=#{full_name} guid=#{guid} error=not configured to deploy"
+    Rails.logger.warn "class=receiver event=#{event} repo=#{full_name} guid=#{guid} error=not configured to deploy"
   end
 
   def log_creation

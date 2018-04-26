@@ -32,8 +32,8 @@ module Heaven
         Heaven.redis
       end
 
-      def log(line)
-        Rails.logger.info "provider=#{self.class.name} ref=#{ref} #{name}-#{guid}: #{line}"
+      def log(msg)
+        Rails.logger.info "provider=#{self.class.name} ref=#{ref} name=#{name} msg=#{msg}"
       end
 
       def gem_executable_path(name)
@@ -134,10 +134,12 @@ module Heaven
       end
 
       def execute
+        log "didn't implement execute"
         warn "Heaven Provider(#{name}) didn't implement execute"
       end
 
       def notify
+        log "didn't implement notify"
         warn "Heaven Provider(#{name}) didn't implement notify"
       end
 
