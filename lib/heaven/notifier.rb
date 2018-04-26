@@ -17,7 +17,7 @@ module Heaven
       elsif campfire?
         ::Heaven::Notifier::Campfire.new(payload)
       else
-        # noop on posting
+        Rails.logger.warn "class=#{self.class.name} msg=no notifier configured"
       end
     end
 

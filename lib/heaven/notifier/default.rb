@@ -164,7 +164,13 @@ module Heaven
         Heaven.redis.set("#{name_with_owner}-#{environment}-revision", sha)
       end
 
+      def log(msg)
+        Rails.logger.info "provider=#{self.class.name} name=#{name} ref=#{ref} msg=#{msg}"
+      end
+
       def post!
+        log("about to post msg")
+
         deliver(default_message)
 
         return unless success? && deploy?
