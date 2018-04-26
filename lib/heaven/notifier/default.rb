@@ -165,7 +165,7 @@ module Heaven
       end
 
       def log(msg)
-        Rails.logger.info "provider=#{self.class.name} name=#{name} ref=#{ref} msg=#{msg}"
+        Rails.logger.info "provider=#{self.class.name} name=#{name_with_owner} ref=#{ref} msg=#{msg}"
       end
 
       def post!

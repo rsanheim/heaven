@@ -29,7 +29,7 @@ class Receiver
   end
 
   def log_creation
-    Rails.logger.info "class=receiver event=#{event} repo=#{full_name} guid=#{guid} data=#{data}"
+    Rails.logger.info "class=receiver event=#{event} repo=#{full_name} guid=#{guid} msg=created"
   end
 
   def active_repository?
