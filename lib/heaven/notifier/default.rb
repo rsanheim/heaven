@@ -100,8 +100,8 @@ module Heaven
       end
 
       def chat_user
-        deployment_payload["notify"]["user_name"] ||
-          deployment_payload["notify"]["user"] || "unknown"
+        return "unknown" unless deployment_payload["notify"]
+        deployment_payload["notify"]["user_name"] || deployment_payload["notify"]["user"] || "unknown"
       end
 
       def chat_room
