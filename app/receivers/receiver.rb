@@ -12,16 +12,23 @@ class Receiver
 
   def self.perform(event, guid, data)
     receiver = new(event, guid, data)
-
     if receiver.active_repository?
       receiver.run!
     else
-      Rails.logger.info "Repository is not configured to deploy: #{receiver.full_name}"
+      receiver.log_inactive_repo
     end
   end
 
   def full_name
     data["repository"] && data["repository"]["full_name"]
+  end
+
+  def log_inactive_repo
+    Rails.logger.warn "class=reciever event=#{event} repo=#{full_name} guid=#{guid} error=not configured to deploy"
+  end
+
+  def log_creation
+    Rails.logger.info "class=receiver event=#{event} repo=#{full_name} guid=#{guid} data=#{data}"
   end
 
   def active_repository?
@@ -54,7 +61,7 @@ class Receiver
     elsif event == "status"
       Resque.enqueue(Heaven::Jobs::Status, guid, data)
     else
-      Rails.logger.info "Unhandled event type, #{event}."
+      Rails.logger.warn "class=receiver event=#{event} repo=#{full_name} error=Unhandled event type"
     end
   end
 end
