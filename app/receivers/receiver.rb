@@ -12,6 +12,7 @@ class Receiver
 
   def self.perform(event, guid, data)
     receiver = new(event, guid, data)
+    receiver.log_creation
     if receiver.active_repository?
       receiver.run!
     else
