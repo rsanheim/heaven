@@ -12,8 +12,8 @@ module Heaven
         Rails.logger.info "message: #{message}"
 
         output_message << "##{deployment_number} - #{repo_name} / #{ref} / #{environment}"
-        slack_account.ping "",
-          :channel     => "##{chat_room}",
+
+        options = {
           :username    => slack_bot_name,
           :icon_url    => slack_bot_icon,
           :attachments => [{
@@ -21,6 +21,9 @@ module Heaven
             :color   => green? ? "good" : "danger",
             :pretext => pending? ? output_message : " "
           }]
+        }
+        options.merge!(channel: "#{chat_room}") if chat_room
+        slack_account.ping "", options
       end
 
       def default_message

@@ -3,6 +3,15 @@ require "spec_helper"
 describe "Heaven::Notifier::Slack" do
   include FixtureHelper
 
+  it "does not require a chat room" do
+    Heaven.redis.set("atmos/my-robot-production-revision", "sha")
+
+    data = decoded_fixture_data("deployment-success")
+    data["deployment"]["payload"]["notify"].delete("room")
+
+    notifier = Heaven::Notifier::Slack.new(data)
+  end
+
   it "handles pending notifications" do
     Heaven.redis.set("atmos/my-robot-production-revision", "sha")
 
