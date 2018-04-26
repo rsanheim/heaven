@@ -10,7 +10,7 @@ module Heaven
         Rails.logger.info "class=#{name} event=perform notifier=#{notifier}"
         notifier.post! if notifier
       rescue => e
-        Rails.logger.error "class=#{name} error=#{e} message=#{e.message}"
+        Rails.logger.error "class=#{name} error=#{e} message=#{e.backtrace}"
       end
     end
   end
