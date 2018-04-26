@@ -9,6 +9,8 @@ module Heaven
         notifier = Heaven::Notifier.for(payload)
         Rails.logger.info "class=#{name} event=perform notifier=#{notifier}"
         notifier.post! if notifier
+      rescue => e
+        Rails.logger.error "class=#{name} error=#{e} message=#{e.message}"
       end
     end
   end
