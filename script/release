@@ -3,6 +3,8 @@ set -ex
 USERNAME=rsanheim
 IMAGE=heaven
 
+bin/rake log:clear
+
 version=`git rev-parse HEAD`
 echo "Tagging as $version"
 
