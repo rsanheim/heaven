@@ -21,7 +21,7 @@ module Heaven
     # config.i18n.default_locale = :de
 
     config.logger    = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
-    config.log_level = :info
+    config.log_level = ENV["HEAVEN_LOG_LEVEL"] || :info
     config.log_formatter = ::Logger::Formatter.new
 
     config.serve_static_files = true
