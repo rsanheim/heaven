@@ -5,7 +5,10 @@ namespace :resque do
     Resque.before_fork do
       ActiveRecord::Base.establish_connection
 
-      Resque.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
+      logger = Logger.new(STDOUT)
+      logger.formatter = ::Logger::Formatter.new
+
+      Resque.logger = ActiveSupport::TaggedLogging.new(logger)
       Resque.logger.level = Logger::INFO
       Resque.logger.info "event=resque_logger_initialized"
     end
