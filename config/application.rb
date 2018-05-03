@@ -20,9 +20,11 @@ module Heaven
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.logger    = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
+    logger = Logger.new(STDOUT)
+    logger.formatter = ::Logger::Formatter.new
+
+    config.logger = ActiveSupport::TaggedLogging.new(logger)
     config.log_level = ENV["HEAVEN_LOG_LEVEL"] || :info
-    config.log_formatter = ::Logger::Formatter.new
 
     config.serve_static_files = true
     config.action_dispatch.x_sendfile_header = nil
