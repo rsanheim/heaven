@@ -19,6 +19,7 @@ module Heaven
         ::Heaven::Notifier::Campfire.new(payload)
       else
         Rails.logger.warn "class=#{name} event=find_notifier msg=no notifier configured"
+        nil
       end
     end
 
