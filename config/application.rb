@@ -23,8 +23,8 @@ module Heaven
     config.logger    = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
     config.log_level = :info
     config.log_formatter = ::Logger::Formatter.new
-    
-    config.serve_static_assets = true
+
+    config.serve_static_files = true
     config.action_dispatch.x_sendfile_header = nil
   end
 end
