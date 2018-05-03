@@ -6,7 +6,7 @@ namespace :resque do
       ActiveRecord::Base.establish_connection
 
       Resque.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
-      Resque.logger.level = Logger::DEBUG
+      Resque.logger.level = Logger::INFO
       Resque.logger.info "event=resque_logger_initialized"
     end
   end
