@@ -20,6 +20,7 @@ module Heaven
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    config.logger    = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
     config.log_level = :info
     config.log_formatter = ::Logger::Formatter.new
   end
