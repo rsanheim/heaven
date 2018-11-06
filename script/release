@@ -1,6 +1,6 @@
 set -ex
 
-USERNAME=rsanheim
+USERNAME=firstleads
 IMAGE=heaven
 
 bin/rake log:clear
