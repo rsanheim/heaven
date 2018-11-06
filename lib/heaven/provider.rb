@@ -18,6 +18,7 @@ module Heaven
       "fabric"             => Fabric,
       "elastic_beanstalk"  => ElasticBeanstalk,
       "bundler_capistrano" => BundlerCapistrano,
+      "bundler_capistrano_git" => BundlerCapistranoGit,
       "ansible"            => Ansible,
       "shell"              => Shell
     }
