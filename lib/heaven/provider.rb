@@ -5,6 +5,7 @@ require "heaven/provider/fabric"
 require "heaven/provider/elastic_beanstalk"
 require "heaven/provider/dpl"
 require "heaven/provider/bundler_capistrano"
+require "heaven/provider/bundler_capistrano_git"
 require "heaven/provider/ansible"
 require "heaven/provider/shell"
 
@@ -18,6 +19,7 @@ module Heaven
       "fabric"             => Fabric,
       "elastic_beanstalk"  => ElasticBeanstalk,
       "bundler_capistrano" => BundlerCapistrano,
+      "bundler_capistrano_git" => BundlerCapistranoGit,
       "ansible"            => Ansible,
       "shell"              => Shell
     }

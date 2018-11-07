@@ -53,8 +53,8 @@ module Heaven
       end
 
       def bundle_definition
-        gemfile_path = File.expand_path("Gemfile", unpacked_directory)
-        lockfile_path = File.expand_path("Gemfile.lock", unpacked_directory)
+        gemfile_path = File.expand_path("Gemfile", checkout_directory)
+        lockfile_path = File.expand_path("Gemfile.lock", checkout_directory)
         Bundler::Definition.build(gemfile_path, lockfile_path, nil)
       end
 
