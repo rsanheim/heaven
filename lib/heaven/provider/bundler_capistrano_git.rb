@@ -24,7 +24,7 @@ module Heaven
 
         Dir.chdir(checkout_directory) do
           log "Fetching the latest code"
-          execute_and_log(%w{git fetch})
+          execute_and_log(["git", "fetch", "--prune"])
           execute_and_log(["git", "reset", "--hard", sha])
 
           File.write("deployment.json", deployment_data.to_json)
