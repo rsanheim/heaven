@@ -15,6 +15,7 @@ gem "faraday_middleware"
 # Providers
 gem "dpl",        "1.5.7"
 gem "aws-sdk"
+gem "aws-sdk-lambda", "~> 1"
 gem "capistrano", "2.9.0"
 
 # Notifiers
