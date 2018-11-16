@@ -15,7 +15,7 @@ module Heaven
       end
 
       def turnkey_get_or_create(turnkey_id, ref)
-        client = Aws::Lambda::Client.new(region: "#{AWS_REGION}")
+        client = Aws::Lambda::Client.new(region: "#{ENV.fetch('AWS_REGION')}")
         # This operation is idempotent per PR
         response = client.invoke(
           function_name: "brainy-turnkey-create-turnkey",
@@ -31,9 +31,10 @@ module Heaven
         return execute_and_log(["/usr/bin/true"]) if Rails.env.test?
 
         if environment == "turnkey"
-          turnkey_id = "tk#{payload.pull_request_id}"
+          turnkey_id = "tk#{custom_payload['pull_request_id']}"
           turnkey_instance = turnkey_get_or_create(turnkey_id, ref)
-          ENV.store("TURNKEY_INSTANCE", turnkey_id)
+        else
+          turnkey_id = nil
         end
 
         unless File.exist?(checkout_directory)
@@ -49,6 +50,10 @@ module Heaven
           File.write("deployment.json", deployment_data.to_json)
 
           Bundler.with_clean_env do
+            unless turnkey_id.nil?
+              ENV.store("TURNKEY_INSTANCE", turnkey_id)
+            end
+
             if bundler_private_source.present? && bundler_private_credentials.present?
               bundler_config_string = ["bundle", "config", bundler_private_source, bundler_private_credentials]
               log "Adding bundler config"
