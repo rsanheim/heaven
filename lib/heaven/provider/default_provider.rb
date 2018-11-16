@@ -81,6 +81,13 @@ module Heaven
         deployment_data["environment"]
       end
 
+      # Is this environment a "turnkey" environment? A turnkey environment is one that we dynamically spin
+      # up and spin down in response to events.  This is often used for dynamic staging / QA environments,
+      # for example.
+      def turnkey?
+        environment == "turnkey"
+      end
+
       def description
         deployment_data["description"] || "Deploying from #{Heaven::VERSION}"
       end

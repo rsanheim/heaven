@@ -30,7 +30,7 @@ module Heaven
       def execute
         return execute_and_log(["/usr/bin/true"]) if Rails.env.test?
 
-        if environment == "turnkey"
+        if turnkey?
           turnkey_id = "tk#{custom_payload['pull_request_id']}"
           turnkey_instance = turnkey_get_or_create(turnkey_id, ref)
         else
