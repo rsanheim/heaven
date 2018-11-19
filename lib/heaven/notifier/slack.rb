@@ -32,7 +32,6 @@ module Heaven
         case state
         when "success"
           message << "'s #{environment} deployment of #{repository_link} is done! "
-          message << "[Available here](#{turnkey['turnkey_url']}) " if turnkey?
         when "failure"
           message << "'s #{environment} deployment of #{repository_link} failed. "
         when "error"

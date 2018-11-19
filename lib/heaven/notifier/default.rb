@@ -79,6 +79,10 @@ module Heaven
         deployment["environment"]
       end
 
+      def turnkey?
+        deployment.key?("turnkey")
+      end
+
       def task
         deployment["task"]
       end
