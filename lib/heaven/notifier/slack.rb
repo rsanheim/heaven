@@ -31,12 +31,8 @@ module Heaven
         message << " : #{user_link}"
         case state
         when "success"
-          if environment == "turnkey"
-            turnkey_url = "https://brainy-tk#{custom_payload['pull_request_id']}.first.io"
-            message << "'s #{environment} deployment of #{repository_link} is done! Available at #{turnkey_url} "
-          else
-            message << "'s #{environment} deployment of #{repository_link} is done! "
-          end
+          message << "'s #{environment} deployment of #{repository_link} is done! "
+          message << "[Available here](#{turnkey['turnkey_url']}) " if turnkey?
         when "failure"
           message << "'s #{environment} deployment of #{repository_link} failed. "
         when "error"
