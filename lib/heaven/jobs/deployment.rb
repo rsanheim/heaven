@@ -29,6 +29,11 @@ module Heaven
       end
 
       def self.perform(guid, data)
+        # This will provision a new environment if specified
+        provisioner = Heaven::Provisioner.from(guid, data)
+        provisioner.execute! if provisioner
+
+        # Run code deployment
         provider = Heaven::Provider.from(guid, data)
         provider.run! if provider
       end

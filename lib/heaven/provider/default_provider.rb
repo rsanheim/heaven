@@ -13,11 +13,12 @@ module Heaven
       # and http://linux.die.net/man/1/git-check-ref-format
       VALID_GIT_REF = %r{\A(?!/)(?!.*(?:/\.|//|@\{|\\|\.\.))[\040-\176&&[^ ~\^:?*\[]]+(?<!\.lock|/|\.)\z}
 
-      def initialize(guid, data)
+      def initialize(guid, data, provision = nil)
         @guid        = guid
         @name        = "unknown"
         @data        = data
         @credentials = ::Deployment::Credentials.new(File.expand_path("~"))
+        @provision   = provision
       end
 
       def output

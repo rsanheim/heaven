@@ -1,4 +1,4 @@
-require "heaven/provider/aws_lambda"
+require "heaven/provisioner/aws_lambda"
 
 module Heaven
   module Provisioner
