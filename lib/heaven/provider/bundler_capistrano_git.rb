@@ -31,7 +31,6 @@ module Heaven
 
           Bundler.with_clean_env do
             if turnkey?
-              turnkey = provision_turnkey
               ENV.store("TURNKEY_INSTANCE", turnkey[:turnkey_id])
             end
 
