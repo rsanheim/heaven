@@ -14,28 +14,8 @@ module Heaven
         gem_executable_path("cap")
       end
 
-      def turnkey_get_or_create(turnkey_id, ref)
-        client = Aws::Lambda::Client.new(region: "#{ENV.fetch('AWS_REGION')}")
-        # This operation is idempotent per PR
-        response = client.invoke(
-          function_name: "brainy-turnkey-create-turnkey",
-          payload: { turnkey: turnkey_id, branch: ref }.to_json
-        )
-
-        return response  
-
-        raise Errors::FunctionInvocationError, "#{response.status_code}: #{response.function_error}"
-      end
-
       def execute
         return execute_and_log(["/usr/bin/true"]) if Rails.env.test?
-
-        if turnkey?
-          turnkey_id = "tk#{custom_payload['pull_request_id']}"
-          turnkey_instance = turnkey_get_or_create(turnkey_id, ref)
-        else
-          turnkey_id = nil
-        end
 
         unless File.exist?(checkout_directory)
           log "Cloning #{repository_url} into #{checkout_directory}"
@@ -50,8 +30,9 @@ module Heaven
           File.write("deployment.json", deployment_data.to_json)
 
           Bundler.with_clean_env do
-            unless turnkey_id.nil?
-              ENV.store("TURNKEY_INSTANCE", turnkey_id)
+            if turnkey?
+              turnkey = provision_turnkey
+              ENV.store("TURNKEY_INSTANCE", turnkey[:turnkey_id])
             end
 
             if bundler_private_source.present? && bundler_private_credentials.present?

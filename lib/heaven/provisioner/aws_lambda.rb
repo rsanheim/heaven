@@ -20,7 +20,10 @@ module Heaven
           function_name: function_name,
           payload: { pull_request: pull_request }.to_json
         )
-
+        
+        # expects a payload with the following:
+        # : provision_id: an id for the provisioned environment, which can be passed to a provider
+        # : provision_url: URL where the provisioned environment can be accessed
         @response = JSON.parse(response.payload.string, symbolize_names: true)
 
         raise Errors::FunctionInvocationError, "#{response.status_code}: #{response.function_error}"

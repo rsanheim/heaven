@@ -13,12 +13,11 @@ module Heaven
       # and http://linux.die.net/man/1/git-check-ref-format
       VALID_GIT_REF = %r{\A(?!/)(?!.*(?:/\.|//|@\{|\\|\.\.))[\040-\176&&[^ ~\^:?*\[]]+(?<!\.lock|/|\.)\z}
 
-      def initialize(guid, data, provision = nil)
+      def initialize(guid, data)
         @guid        = guid
         @name        = "unknown"
         @data        = data
         @credentials = ::Deployment::Credentials.new(File.expand_path("~"))
-        @provision   = provision
       end
 
       def output
@@ -82,11 +81,16 @@ module Heaven
         deployment_data["environment"]
       end
 
-      # Is this environment a "turnkey" environment? A turnkey environment is one that we dynamically spin
-      # up and spin down in response to events.  This is often used for dynamic staging / QA environments,
-      # for example.
       def turnkey?
-        environment == "turnkey"
+        deployment_data.key?("turnkey")
+      end
+
+      def provision_turnkey
+        provisioner = Heaven::Provisioner.from(guid, data)
+        if provisioner
+          provisioner.execute!
+          provisioner.response
+        end
       end
 
       def description

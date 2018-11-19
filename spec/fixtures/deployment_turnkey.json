@@ -26,6 +26,18 @@
       }
     },
     "environment": "turnkey",
+    "turnkey": {
+      "environments": ["turnkey"],
+      "provisioner": "provisioner_type",
+      "deploy_function": "some_function"
+    },
+    "pull_request": {
+      "id": 1,
+      "url": "https://api.github.com/repos/atmos/heaven/pull/42",
+      "html_url": "https://github.com/atmos/heaven/pull/42",
+      "number": 42,
+      "title": "awesome pull request"
+    },
     "description": "Deploying from hubot-deploy-v0.6.53",
     "creator": {
       "login": "atmos",
