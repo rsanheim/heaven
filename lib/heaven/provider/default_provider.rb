@@ -81,12 +81,8 @@ module Heaven
         deployment_data["environment"]
       end
 
-      def turnkey?
-        deployment_data["payload"].key?("turnkey")
-      end
-
       def provision_turnkey
-        provisioner = Heaven::Provisioner.from(guid, data)
+        provisioner = Heaven::Provisioner.from(data)
         if provisioner
           provisioner.execute!
           status.provisioned!(provisioner.response)
