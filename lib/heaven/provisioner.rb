@@ -13,18 +13,18 @@ module Heaven
 
     def self.provisioner_class_for(data)
       name     = provisioner_name_for(data)
-      provider = PROVISIONERS[name]
+      provisioner = PROVISIONERS[name]
 
-      Rails.logger.info "No deployment system for #{name}" unless provider
+      Rails.logger.info "No deployment system for #{name}" unless provisioner
 
-      provider
+      provisioner
     end
 
     def self.provisioner_name_for(data)
       return unless data &&
                     data.key?("deployment") &&
                     data["deployment"].key?("payload") &&
-                    data["deployment"]["payload"].key("turnkey")
+                    data["deployment"]["payload"].key?("turnkey")
 
       data["deployment"]["payload"]["turnkey"]["provisioner"]
     end

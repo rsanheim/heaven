@@ -82,7 +82,7 @@ module Heaven
       end
 
       def turnkey?
-        deployment_data.key?("turnkey")
+        deployment_data["payload"].key?("turnkey")
       end
 
       def provision_turnkey
