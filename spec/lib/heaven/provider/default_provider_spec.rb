@@ -64,10 +64,6 @@ describe Heaven::Provider::DefaultProvider do
         data["deployment"]["payload"]["config"]["production_url"]
       )
     end
-
-    it "is not a turnkey environment" do
-      expect(deployment.turnkey?).to be_false
-    end
   end
 
   context "staging environment" do
@@ -85,12 +81,4 @@ describe Heaven::Provider::DefaultProvider do
     end
   end
 
-  context "turnkey environment" do
-    let(:data) { decoded_fixture_data("deployment_turnkey") }
-    let!(:deployment) { Heaven::Provider::DefaultProvider.new(SecureRandom.uuid, data) }
-
-    it "is a turnkey environemnt" do
-      expect(deployment.turnkey?).to be_true
-    end
-  end
 end

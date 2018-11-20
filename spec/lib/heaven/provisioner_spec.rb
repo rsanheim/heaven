@@ -10,11 +10,11 @@ describe Heaven::Provisioner do
       data = decoded_fixture_data("deployment_turnkey")
       data["deployment"]["payload"]["turnkey"]["provisioner"] = "aws_lambda"
 
-      provisioner = Heaven::Provisioner.from("1", data)
+      provisioner = Heaven::Provisioner.from(data)
 
       expect(provisioner).to be_a(Heaven::Provisioner::AwsLambdaProvisioner)
 
-      provisioner = Heaven::Provisioner.from("1", {})
+      provisioner = Heaven::Provisioner.from({})
 
       expect(provisioner).to be_nil
     end
