@@ -183,9 +183,7 @@ module Heaven
         Timeout.timeout(timeout) do
           start_deployment_timeout!
           setup
-          if turnkey?
-            turnkey = provision_turnkey
-          end
+          provision_turnkey
           execute unless Rails.env.test?
           notify
           record
