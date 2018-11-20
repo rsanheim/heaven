@@ -89,7 +89,7 @@ module Heaven
         provisioner = Heaven::Provisioner.from(guid, data)
         if provisioner
           provisioner.execute!
-          provisioner.response
+          status.provisioned!(provisioner.response)
         end
       end
 
