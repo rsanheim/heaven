@@ -79,10 +79,6 @@ module Heaven
         deployment["environment"]
       end
 
-      def turnkey?
-        deployment.key?("turnkey")
-      end
-
       def task
         deployment["task"]
       end
@@ -101,6 +97,11 @@ module Heaven
 
       def deployment_payload
         @deployment_payload ||= deployment["payload"]
+      end
+
+      def provisioned_turnkey
+        return unless deployment_payload["provisioned_turnkey"]
+        deployment_payload["provisioned_turnkey"]["route"]
       end
 
       def chat_user

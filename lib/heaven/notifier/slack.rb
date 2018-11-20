@@ -32,6 +32,9 @@ module Heaven
         case state
         when "success"
           message << "'s #{environment} deployment of #{repository_link} is done! "
+        when "provisioned"
+          message << "'s #{environment} provisioning of #{repository_link} is ready " 
+          message << "and will be (available here)[#{provisioned_turnkey}] once deploy is complete "
         when "failure"
           message << "'s #{environment} deployment of #{repository_link} failed. "
         when "error"
