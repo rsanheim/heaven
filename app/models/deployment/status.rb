@@ -37,6 +37,11 @@ class Deployment
       create_status(:status => "pending", :completed => false)
     end
 
+    def provisioned!(provisioned_turnkey)
+      payload.merge!("provisioned_turnkey" => provisioned_turnkey)
+      create_status(:status => "provisioned", :completed => false)
+    end
+
     def success!
       create_status(:status => "success")
     end
