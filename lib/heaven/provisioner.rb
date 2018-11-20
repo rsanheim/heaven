@@ -6,16 +6,16 @@ module Heaven
       "aws_lambda"  => AwsLambdaProvisioner
     }
 
-    def self.from(guid, data)
+    def self.from(data)
       klass = provisioner_class_for(data)
-      klass.new(guid, data) if klass
+      klass.new(data) if klass
     end
 
     def self.provisioner_class_for(data)
       name     = provisioner_name_for(data)
       provisioner = PROVISIONERS[name]
 
-      Rails.logger.info "No deployment system for #{name}" unless provisioner
+      Rails.logger.error "No deployment system for #{name}" unless provisioner
 
       provisioner
     end

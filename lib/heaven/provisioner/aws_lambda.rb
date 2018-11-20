@@ -2,10 +2,9 @@ module Heaven
   module Provisioner
     class AwsLambdaProvisioner
     
-      attr_accessor :aws_region, :guid, :data, :client, :response
+      attr_accessor :aws_region, :data, :client, :response
 
-      def initialize(guid, data)
-        @guid       = guid
+      def initialize(data)
         @data       = data
         @aws_region = ENV.fetch('AWS_REGION')
         @client     = Aws::Lambda::Client.new(region: "#{aws_region}")
