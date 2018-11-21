@@ -91,7 +91,7 @@ module Heaven
           Rails.logger.info provisioner.response
           @provisioner_response = provisioner.response
           Rails.logger.info "Provisioner response saved, sending notification"
-          status.provisioned!(provisioner_response)
+          status.in_progress!(provisioner_response)
         end
       end
 
