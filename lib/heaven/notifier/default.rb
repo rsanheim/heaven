@@ -99,14 +99,9 @@ module Heaven
         @deployment_payload ||= deployment["payload"]
       end
 
-      def provisioned_turnkey
-        return unless deployment_payload["provisioned_turnkey"]
-        deployment_payload["provisioned_turnkey"]["route"]
-      end
-
       def environment_url
-        return unless deployment_payload["environment_url"]
-        deployment_payload["environment_url"]
+        return unless deployment["environment_url"]
+        deployment["environment_url"]
       end
 
       def chat_user
