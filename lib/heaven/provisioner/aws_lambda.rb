@@ -30,6 +30,10 @@ module Heaven
           payload: { pull_request: pull_request }.to_json
         )
 
+        unless ((200..299) === response.status_code) && !response.key?("function_error")
+          raise Errors::FunctionInvocationError, "#{response.status_code}: #{response.function_error}"
+        end
+
         Rails.logger.info "Invoked Lambda! Parsing JSON response"
         
         # expects a payload with the following:
@@ -37,10 +41,6 @@ module Heaven
         # : turnkey_url: URL where the provisioned environment can be accessed
         @response = JSON.parse(response.payload.string, symbolize_names: true)
         Rails.logger.info "JSON response parsed"
-
-        unless ((200..299) === response.status_code) && !response.key?("function_error")
-          raise Errors::FunctionInvocationError, "#{response.status_code}: #{response.function_error}"
-        end
 
       end
     end
