@@ -84,7 +84,7 @@ module Heaven
       def provision_turnkey
         provisioner = Heaven::Provisioner.from(data)
         if provisioner
-          provisioner.execute!
+          provisioner.execute
           provisioner_response = provisioner.response
           status.provisioned!(provisioner_response)
         end
