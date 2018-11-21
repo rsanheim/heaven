@@ -10,7 +10,7 @@ module Heaven
         @client     = Aws::Lambda::Client.new(region: "#{aws_region}")
       end
 
-      def execute
+      def execute!
 
         function_name = data["deployment"]["payload"]["turnkey"]["deploy_function"]
         pull_request = data["deployment"]["payload"]["pull_request"]
