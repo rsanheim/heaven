@@ -60,6 +60,7 @@ class Deployment
       if Heaven.testing?
         self.class.deliveries << payload.merge("status" => status)
       else
+        api.default_media_type = "application/vnd.github.flash-preview+json"
         api.create_deployment_status(url, status, payload)
       end
 
