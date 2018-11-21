@@ -39,7 +39,7 @@ class Deployment
 
     def in_progress!(provisioned_turnkey = nil)
       extra_options = {
-        "provisioned_turnkey" => provisioned_turnkey
+        "environment_url" => provisioned_turnkey[:route]
       }
       create_status(:status => "in_progress", :completed => false, extra_options: extra_options)
     end

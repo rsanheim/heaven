@@ -104,6 +104,11 @@ module Heaven
         deployment_payload["provisioned_turnkey"]["route"]
       end
 
+      def environment_url
+        return unless deployment_payload["environment_url"]
+        deployment_payload["environment_url"]
+      end
+
       def chat_user
         return "unknown" unless deployment_payload["notify"]
         deployment_payload["notify"]["user_name"] || deployment_payload["notify"]["user"] || "unknown"
