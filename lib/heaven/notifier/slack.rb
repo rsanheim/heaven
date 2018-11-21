@@ -33,7 +33,6 @@ module Heaven
         when "success"
           message << "'s #{environment} deployment of #{repository_link} is done! "
         when "in_progress"
-          Rails.logger.info "#{deployment_payload.inspect}"
           message << "'s #{environment} provisioning of #{repository_link} is ready " 
           message << "and will be [available here](#{environment_url}) once deploy is complete "
         when "failure"

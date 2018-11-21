@@ -31,10 +31,8 @@ module Heaven
 
           Bundler.with_clean_env do
             if turnkey?
-              log "We have a turnkey - trying to grab the turnkey_id from #{provisioner_response.inspect} and store it in the ENV"
               turnkey_id = provisioner_response[:turnkey_id]
               ENV["TURNKEY_INSTANCE"] = turnkey_id
-              log "Our TURNKEY_INSTANCE=#{ENV['turnkey_id']}"
             end
 
             if bundler_private_source.present? && bundler_private_credentials.present?
