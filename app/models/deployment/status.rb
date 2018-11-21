@@ -29,7 +29,7 @@ class Deployment
         "target_url" => output,
         "description" => description,
         "environment_url" => environment_url,
-        :accept => "application/vnd.github.ant-man-preview+json"
+        :accept => "application/vnd.github.ant-man-preview+json,application/vnd.github.flash-preview+json"
       }
     end
 
@@ -38,12 +38,10 @@ class Deployment
     end
 
     def in_progress!(provisioned_turnkey = nil)
-      payload.merge!(
-        "provisioned_turnkey" => provisioned_turnkey,
-        :accept => "application/vnd.github.ant-man-preview+json,application/vnd.github.flash-preview+json"
-      )
-      Rails.logger.info payload
-      create_status(:status => "in_progress", :completed => false)
+      extra_options = {
+        "provisioned_turnkey" => provisioned_turnkey
+      }
+      create_status(:status => "in_progress", :completed => false, extra_options: extra_options)
     end
 
     def success!
@@ -60,11 +58,17 @@ class Deployment
 
     private
 
-    def create_status(status:, completed: true)
+    def create_status(status:, completed: true, extra_options: nil)
+      options = if extra_options
+        payload.merge(extra_options)
+      else
+        payload
+      end
       if Heaven.testing?
         self.class.deliveries << payload.merge("status" => status)
       else
-        api.create_deployment_status(url, status, payload)
+        Rails.logger.info options
+        api.create_deployment_status(url, status, options)
       end
 
       @completed = completed
