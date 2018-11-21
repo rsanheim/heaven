@@ -1,6 +1,11 @@
 module Heaven
   module Provisioner
     class AwsLambdaProvisioner
+
+      module Errors
+        class FunctionInvocationError < StandardError
+        end
+      end
     
       attr_accessor :aws_region, :data, :client, :response
 
@@ -33,7 +38,10 @@ module Heaven
         @response = JSON.parse(response.payload.string, symbolize_names: true)
         Rails.logger.info "JSON response parsed"
 
-        raise Errors::FunctionInvocationError, "#{response.status_code}: #{response.function_error}"
+        unless ((200..299) === response.status_code) && !response.key?("function_error")
+          raise Errors::FunctionInvocationError, "#{response.status_code}: #{response.function_error}"
+        end
+
       end
     end
   end
