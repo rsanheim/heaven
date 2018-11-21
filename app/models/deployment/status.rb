@@ -4,7 +4,7 @@ class Deployment
   class Status
     include ApiClient
 
-    attr_accessor :description, :number, :nwo, :output, :completed, :environment_url
+    attr_accessor :description, :number, :nwo, :output, :completed, :environment_url, :auto_inactive
     alias_method :completed?, :completed
 
     def initialize(nwo, number)
@@ -29,6 +29,7 @@ class Deployment
         "target_url" => output,
         "description" => description,
         "environment_url" => environment_url,
+        "auto_inactive" => auto_inactive,
         :accept => "application/vnd.github.ant-man-preview+json,application/vnd.github.flash-preview+json"
       }
     end
@@ -38,7 +39,8 @@ class Deployment
     end
 
     def in_progress!(provisioned_turnkey = nil)
-      self.environment_url = provisioned_turnkey[:route]
+      self.environment_url = provisioned_turnkey[:environment_url]
+      self.auto_inactive = false
       create_status(:status => "in_progress", :completed => false)
     end
 
