@@ -7,7 +7,7 @@ module Heaven
       include DeploymentTimeout
       include LocalLogFile
 
-      attr_accessor :credentials, :guid, :last_child, :name, :data
+      attr_accessor :credentials, :guid, :last_child, :name, :data, :provisioner_response
 
       # See http://stackoverflow.com/questions/12093748/how-do-i-check-for-valid-git-branch-names
       # and http://linux.die.net/man/1/git-check-ref-format
@@ -79,6 +79,20 @@ module Heaven
 
       def environment
         deployment_data["environment"]
+      end
+
+      def turnkey?
+        custom_payload.key?("turnkey")
+      end
+
+      def provision_turnkey
+        provisioner = Heaven::Provisioner.from(data)
+        if provisioner
+          provisioner.execute!
+          Rails.logger.info "Provisioner executed, saving response #{provisioner.response.inspect}"
+          self.provisioner_response = provisioner.response
+          status.in_progress!(provisioner_response)
+        end
       end
 
       def description
@@ -171,6 +185,7 @@ module Heaven
         Timeout.timeout(timeout) do
           start_deployment_timeout!
           setup
+          provision_turnkey
           execute unless Rails.env.test?
           notify
           record

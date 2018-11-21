@@ -80,4 +80,5 @@ describe Heaven::Provider::DefaultProvider do
       )
     end
   end
+
 end

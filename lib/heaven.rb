@@ -38,4 +38,5 @@ Heaven.redis
 require "heaven/version"
 require "heaven/jobs"
 require "heaven/provider"
+require "heaven/provisioner"
 require "heaven/notifier"

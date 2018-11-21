@@ -48,7 +48,7 @@ module Heaven
       end
 
       def green?
-        %w{pending success}.include?(state)
+        %w{pending success in_progress}.include?(state)
       end
 
       def deployment_status_data
@@ -97,6 +97,11 @@ module Heaven
 
       def deployment_payload
         @deployment_payload ||= deployment["payload"]
+      end
+
+      def environment_url
+        return description unless deployment_status_data["environment_url"]
+        deployment_status_data["environment_url"]
       end
 
       def chat_user
