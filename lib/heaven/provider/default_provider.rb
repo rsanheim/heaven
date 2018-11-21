@@ -81,15 +81,18 @@ module Heaven
         deployment_data["environment"]
       end
 
+      def turnkey?
+        custom_payload.key?("turnkey")
+      end
+
       def provision_turnkey
         Rails.logger.info "Made it to 'provision_turnkey'"
         provisioner = Heaven::Provisioner.from(data)
         if provisioner
           Rails.logger.info "Provisioner available, attempting to execute"
           provisioner.execute!
-          Rails.logger.info "Provisioner executed, saving response"
-          Rails.logger.info provisioner.response
-          @provisioner_response = provisioner.response
+          Rails.logger.info "Provisioner executed, saving response #{provisioner.response.inspect}"
+          self.provisioner_response = provisioner.response
           Rails.logger.info "Provisioner response saved, sending notification"
           status.in_progress!(provisioner_response)
         end

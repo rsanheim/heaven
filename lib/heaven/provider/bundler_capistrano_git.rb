@@ -30,7 +30,8 @@ module Heaven
           File.write("deployment.json", deployment_data.to_json)
 
           Bundler.with_clean_env do
-            unless provisioner_response.nil?
+            if turnkey?
+              log "We have a turnkey - trying to grab the turnkey_id from #{provisioner_response.inspect} and store it in the ENV"
               turnkey_id = provisioner_response["turnkey_id"]
               ENV.store("TURNKEY_INSTANCE", turnkey_id)
             end
