@@ -7,7 +7,7 @@ module Heaven
       include DeploymentTimeout
       include LocalLogFile
 
-      attr_accessor :credentials, :guid, :last_child, :name, :data
+      attr_accessor :credentials, :guid, :last_child, :name, :data, :provisioner_response
 
       # See http://stackoverflow.com/questions/12093748/how-do-i-check-for-valid-git-branch-names
       # and http://linux.die.net/man/1/git-check-ref-format
@@ -85,7 +85,8 @@ module Heaven
         provisioner = Heaven::Provisioner.from(data)
         if provisioner
           provisioner.execute!
-          status.provisioned!(provisioner.response)
+          provisioner_response = provisioner.response
+          status.provisioned!(provisioner_response)
         end
       end
 

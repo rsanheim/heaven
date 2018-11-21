@@ -30,8 +30,9 @@ module Heaven
           File.write("deployment.json", deployment_data.to_json)
 
           Bundler.with_clean_env do
-            if turnkey?
-              ENV.store("TURNKEY_INSTANCE", turnkey[:turnkey_id])
+            unless provisioner_response.nil?
+              turnkey_id = provisioner_response["turnkey_id"]
+              ENV.store("TURNKEY_INSTANCE", turnkey_id)
             end
 
             if bundler_private_source.present? && bundler_private_credentials.present?
