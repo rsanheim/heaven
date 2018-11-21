@@ -39,6 +39,7 @@ class Deployment
     end
 
     def in_progress!(provisioned_turnkey = nil)
+      self.description = provisioned_turnkey[:environment_url]
       self.environment_url = provisioned_turnkey[:environment_url]
       self.auto_inactive = false
       create_status(:status => "in_progress", :completed => false)
