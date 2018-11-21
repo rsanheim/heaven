@@ -38,7 +38,11 @@ class Deployment
     end
 
     def in_progress!(provisioned_turnkey = nil)
-      payload.merge!("provisioned_turnkey" => provisioned_turnkey)
+      payload.merge!(
+        "provisioned_turnkey" => provisioned_turnkey,
+        :accept => "application/vnd.github.ant-man-preview+json,application/vnd.github.flash-preview+json"
+      )
+      Rails.logger.info payload
       create_status(:status => "in_progress", :completed => false)
     end
 
@@ -60,7 +64,6 @@ class Deployment
       if Heaven.testing?
         self.class.deliveries << payload.merge("status" => status)
       else
-        api.default_media_type = "application/vnd.github.flash-preview+json"
         api.create_deployment_status(url, status, payload)
       end
 
