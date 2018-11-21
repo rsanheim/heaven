@@ -100,8 +100,8 @@ module Heaven
       end
 
       def environment_url
-        return unless deployment["environment_url"]
-        deployment["environment_url"]
+        return unless deployment_status_data["environment_url"]
+        deployment_status_data["environment_url"]
       end
 
       def chat_user
