@@ -38,10 +38,8 @@ class Deployment
     end
 
     def in_progress!(provisioned_turnkey = nil)
-      extra_options = {
-        "environment_url" => provisioned_turnkey[:route]
-      }
-      create_status(:status => "in_progress", :completed => false, extra_options: extra_options)
+      self.environment_url = provisioned_turnkey[:route]
+      create_status(:status => "in_progress", :completed => false)
     end
 
     def success!
@@ -58,17 +56,12 @@ class Deployment
 
     private
 
-    def create_status(status:, completed: true, extra_options: nil)
-      options = if extra_options
-        payload.merge(extra_options)
-      else
-        payload
-      end
+    def create_status(status:, completed: true)
       if Heaven.testing?
         self.class.deliveries << payload.merge("status" => status)
       else
         Rails.logger.info options
-        api.create_deployment_status(url, status, options)
+        api.create_deployment_status(url, status, payload)
       end
 
       @completed = completed
