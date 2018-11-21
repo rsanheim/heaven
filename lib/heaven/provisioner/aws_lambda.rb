@@ -11,19 +11,27 @@ module Heaven
       end
 
       def execute!
+        Rails.logger.info "Executing AWS Lambda provisioner"
 
         function_name = data["deployment"]["payload"]["turnkey"]["deploy_function"]
         pull_request = data["deployment"]["payload"]["pull_request"]
+
+        Rails.logger.info "Deployment function name: #{function_name}"
+        Rails.logger.info "Deploy pull request:"
+        Rails.logger.info pull_request
 
         response = client.invoke(
           function_name: function_name,
           payload: { pull_request: pull_request }.to_json
         )
+
+        Rails.logger.info "Invoked Lambda! Parsing JSON response"
         
         # expects a payload with the following:
         # : turnkey_id: an id for the provisioned environment, which can be passed to a provider
         # : turnkey_url: URL where the provisioned environment can be accessed
         @response = JSON.parse(response.payload.string, symbolize_names: true)
+        Rails.logger.info "JSON response parsed"
 
         raise Errors::FunctionInvocationError, "#{response.status_code}: #{response.function_error}"
       end
