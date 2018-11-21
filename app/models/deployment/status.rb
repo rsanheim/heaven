@@ -60,7 +60,6 @@ class Deployment
       if Heaven.testing?
         self.class.deliveries << payload.merge("status" => status)
       else
-        Rails.logger.info options
         api.create_deployment_status(url, status, payload)
       end
 
