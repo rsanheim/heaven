@@ -100,7 +100,7 @@ module Heaven
       end
 
       def environment_url
-        return unless deployment_status_data["environment_url"]
+        return decription unless deployment_status_data["environment_url"]
         deployment_status_data["environment_url"]
       end
 
