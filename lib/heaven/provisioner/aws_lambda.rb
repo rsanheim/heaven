@@ -15,8 +15,17 @@ module Heaven
         @client     = Aws::Lambda::Client.new(region: "#{aws_region}")
       end
 
+      def teardown!
+        run!("teardown_function")
+      end
+
       def execute!
-        function_name = data["deployment"]["payload"]["turnkey"]["deploy_function"]
+        run!("deploy_function")
+      end
+
+      def run!(function_type)
+        return unless data["deployment"]["payload"]["turnkey"][function_type]
+        function_name = data["deployment"]["payload"]["turnkey"][function_type]
         pull_request = data["deployment"]["payload"]["pull_request"]
 
         response = client.invoke(
