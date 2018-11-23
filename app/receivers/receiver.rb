@@ -61,6 +61,8 @@ class Receiver
       Resque.enqueue(Heaven::Jobs::DeploymentStatus, data)
     elsif event == "status"
       Resque.enqueue(Heaven::Jobs::Status, guid, data)
+    elsif event == "pull_request"
+      Resque.enqueue(Heaven::Jobs::PullRequest, guid, data)
     else
       Rails.logger.warn "class=receiver event=#{event} repo=#{full_name} error=Unhandled event type"
     end

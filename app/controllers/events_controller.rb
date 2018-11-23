@@ -23,7 +23,7 @@ class EventsController < ApplicationController
   end
 
   def valid_events
-    %w{deployment deployment_status status ping}
+    %w{deployment deployment_status pull_request status ping}
   end
 
   private
