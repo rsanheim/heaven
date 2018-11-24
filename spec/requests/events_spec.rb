@@ -52,5 +52,14 @@ describe "Receiving GitHub hooks", :request do
       expect(last_response).to be_successful
       expect(last_response.status).to eql(201)
     end
+
+    it "handles pull request events from valid hosts" do
+      github_event("pull_request")
+
+      post "/events", fixture_data("pull-request-closed"), request_env
+
+      expect(last_response).to be_successful
+      expect(last_response.status).to eql(201)
+    end
   end
 end
