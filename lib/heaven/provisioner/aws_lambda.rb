@@ -24,7 +24,7 @@ module Heaven
       end
 
       def run!(function_type)
-        return unless data["deployment"]["payload"]["turnkey"][function_type]
+        return unless data["deployment"]["payload"]["turnkey"].include?(function_type)
         function_name = data["deployment"]["payload"]["turnkey"][function_type]
         pull_request = data["deployment"]["payload"]["pull_request"]
 
