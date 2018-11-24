@@ -16,11 +16,11 @@ module Heaven
         @id = data[:id]
       end
 
-      def open?
+      def self.open?
         data[:state] == "open"
       end
 
-      def deployments_perform
+      def self.deployments_perform
         deployments = data[:base][:repo].rels[:deployments].get.data
         deployments.each do |deployment|
           # Make sure this deployment is related to this PR
@@ -30,7 +30,7 @@ module Heaven
         end
       end
 
-      def deployment_perform(deployment)
+      def self.deployment_perform(deployment)
         provisioner = Heaven::Provisioner.from(data)
         if provisioner
           unless open?
