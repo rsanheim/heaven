@@ -11,16 +11,16 @@ module Heaven
 
       def initialize(guid, data)
         @guid = guid
-        # Get the PR as a Sawyer type to take full advantage of hypermedia
-        @data = api.pull_request(data["base"]["repo"]["full_name"], data["number"])
+        @data = data
         @id = data[:id]
       end
 
-      def self.open?
+      def open?
         data[:state] == "open"
       end
 
-      def self.deployments_perform
+      def deployments_perform
+        pull_request = api.pull_request(data["base"]["repo"]["full_name"], data["number"])
         deployments = data[:base][:repo].rels[:deployments].get.data
         deployments.each do |deployment|
           # Make sure this deployment is related to this PR
@@ -30,7 +30,7 @@ module Heaven
         end
       end
 
-      def self.deployment_perform(deployment)
+      def deployment_perform(deployment)
         provisioner = Heaven::Provisioner.from(data)
         if provisioner
           unless open?
@@ -40,7 +40,7 @@ module Heaven
       end
 
       def self.perform(guid, data)
-        deployments_perform
+        self.deployments_perform
       end
     end
   end
