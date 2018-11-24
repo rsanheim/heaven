@@ -35,6 +35,7 @@ module Heaven
         if provisioner
           unless open?
             provisioner.teardown!
+          end
         end
       end
 
