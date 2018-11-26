@@ -1,5 +1,5 @@
 FROM ruby:2.3.6
-MAINTAINER rsanheim <rsanheim@gmail.com>
+LABEL maintainer="First <developer@first.io>"
 
 RUN mkdir -p /root/.ssh
 COPY config/docker_profile /root/.profile
