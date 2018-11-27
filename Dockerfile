@@ -19,7 +19,7 @@ RUN apt-get update && \
     curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get update && \
     apt-get install -y yarn && \
-    yarn global add expo && \
+    yarn global add expo expo-cli && \
     rm -rf /var/lib/apt/lists/*
 
 COPY . $WORK_DIR
