@@ -21,6 +21,10 @@
 
           File.write("deployment.json", deployment_data.to_json)
 
+          expo_login_string = ["expo", "login", "-u", "$EXPO_USERNAME", "-p", "$EXPO_PASSWORD"]
+          log "Attempting Expo CLI login..."
+          execute_and_log(expo_login_string)
+
           expo_release_string = "yarn publish:#{environment}"
           log "Executing expo release: #{expo_release_string}"
           execute_and_log(expo_release_string)
