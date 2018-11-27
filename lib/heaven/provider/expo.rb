@@ -25,7 +25,7 @@
           log "Attempting yarn install..."
           execute_and_log(yarn_install_string)
 
-          expo_login_string = ["expo", "login", "-u", "#{ENV.fetch('$EXPO_USERNAME')}", "-p", "#{ENV.fetch('$EXPO_PASSWORD')}"]
+          expo_login_string = ["expo", "login", "-u", "#{ENV.fetch('EXPO_USERNAME')}", "-p", "#{ENV.fetch('EXPO_PASSWORD')}"]
           log "Attempting Expo CLI login..."
           execute_and_log(expo_login_string)
 
