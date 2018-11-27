@@ -3,7 +3,7 @@ module DeploymentTimeout
   extend ActiveSupport::Concern
 
   def timeout
-    Integer(ENV["DEPLOYMENT_TIMEOUT"] || "300")
+    Integer(ENV["DEPLOYMENT_TIMEOUT"] || "600")
   end
 
   def deployment_time_elapsed

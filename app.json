@@ -32,7 +32,7 @@
     },
     "DEPLOYMENT_TIMEOUT": {
       "description": "The maximum amount of time a deployment can take in seconds.",
-      "value": "600"
+      "value": "300"
     },
     "RAILS_ENV": {
       "description": "This is what the RAILS_ENV unix environmental variable is set to.",
