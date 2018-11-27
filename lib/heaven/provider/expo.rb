@@ -21,6 +21,14 @@
 
           File.write("deployment.json", deployment_data.to_json)
 
+          yarn_install_string = ["yarn", "install"]
+          log "Attempting yarn install..."
+          execute_and_log(yarn_install_string)
+
+          expo_cleanup_string = ["rm", "-rf", "node_modules/.bin/expo*"]
+          log "Cleaning up extraneous Expo install"
+          execute_and_log(expo_cleanup_string)
+
           expo_login_string = ["expo", "login", "-u", "$EXPO_USERNAME", "-p", "$EXPO_PASSWORD"]
           log "Attempting Expo CLI login..."
           execute_and_log(expo_login_string)
