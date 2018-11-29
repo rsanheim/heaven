@@ -1,5 +1,5 @@
 FROM ruby:2.3.6
-MAINTAINER rsanheim <rsanheim@gmail.com>
+LABEL maintainer="First <developer@first.io>"
 
 RUN mkdir -p /root/.ssh
 COPY config/docker_profile /root/.profile
@@ -11,6 +11,16 @@ RUN mkdir -p $WORK_DIR
 COPY Gemfile $WORK_DIR/Gemfile
 COPY Gemfile.lock $WORK_DIR/Gemfile.lock
 RUN cd $WORK_DIR && bundle install
+
+RUN apt-get update && \
+    apt-get install apt-transport-https && \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+    apt-get update && \
+    apt-get install -y yarn && \
+    yarn global add expo-cli && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY . $WORK_DIR
 
