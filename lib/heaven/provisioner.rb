@@ -22,9 +22,10 @@ module Heaven
 
     def self.provisioner_name_for(data)
       return unless data &&
-                    data.key?("deployment") &&
-                    data["deployment"].key?("payload") &&
-                    data["deployment"]["payload"].key?("turnkey")
+                    data["deployment"] &&
+                    data["deployment"]["payload"] &&
+                    data["deployment"]["payload"]["turnkey"] &&
+                    data["deployment"]["payload"]["turnkey"]["provisioner"]
 
       data["deployment"]["payload"]["turnkey"]["provisioner"]
     end
