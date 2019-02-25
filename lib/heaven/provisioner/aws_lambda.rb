@@ -18,10 +18,11 @@ module Heaven
       def execute!
         function_name = data["deployment"]["payload"]["turnkey"]["deploy_function"]
         pull_request = data["deployment"]["payload"]["pull_request"]
+        environment = data["deployment"]["payload"]["environment"]
 
         response = client.invoke(
           function_name: function_name,
-          payload: { pull_request: pull_request }.to_json
+          payload: { pull_request: pull_request, environment: environment }.to_json
         )
 
         unless ((200..299) === response.status_code) && !response.key?("function_error")
