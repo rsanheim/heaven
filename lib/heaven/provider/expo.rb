@@ -16,6 +16,7 @@
 
         Dir.chdir(checkout_directory) do
           log "Fetching the latest code"
+          execute_and_log(["git", "reset", "--hard"])
           execute_and_log(%w(git checkout master))
           execute_and_log(%w{git fetch})
           execute_and_log(["git", "checkout", ref])
