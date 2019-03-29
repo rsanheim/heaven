@@ -7,7 +7,7 @@ require "heaven/provider/dpl"
 require "heaven/provider/bundler_capistrano"
 require "heaven/provider/bundler_capistrano_git"
 require "heaven/provider/ansible"
-require "heaven/provider/node"
+require "heaven/provider/yarn"
 require "heaven/provider/shell"
 
 # The top-level Heaven module
@@ -22,7 +22,7 @@ module Heaven
       "bundler_capistrano" => BundlerCapistrano,
       "bundler_capistrano_git" => BundlerCapistranoGit,
       "ansible"            => Ansible,
-      "node"               => Node,
+      "yarn"               => Yarn,
       "shell"              => Shell
     }
 

@@ -1,9 +1,9 @@
  module Heaven
   module Provider
-    class Node < DefaultProvider
+    class Yarn < DefaultProvider
       def initialize(guid, payload)
         super
-        @name = "node"
+        @name = "yarn"
       end
 
       def execute
