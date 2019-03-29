@@ -1,4 +1,4 @@
-FROM ruby:2.3.6
+FROM ruby:2.3.8
 LABEL maintainer="First <developer@first.io>"
 
 RUN mkdir -p /root/.ssh
