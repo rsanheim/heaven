@@ -1,9 +1,9 @@
  module Heaven
   module Provider
-    class Expo < DefaultProvider
+    class Node < DefaultProvider
       def initialize(guid, payload)
         super
-        @name = "expo"
+        @name = "node"
       end
 
       def execute
@@ -27,10 +27,6 @@
           yarn_install_string = ["yarn", "install", "--ignore-optional", "--non-interactive"]
           log "Attempting yarn install..."
           execute_and_log(yarn_install_string)
-
-          expo_login_string = ["expo", "login", "-u", "#{ENV.fetch('EXPO_USERNAME')}", "-p", "#{ENV.fetch('EXPO_PASSWORD')}"]
-          log "Attempting Expo CLI login..."
-          execute_and_log(expo_login_string)
 
           deploy_string = ["script/deploy", environment]
           log "Executing deploy: #{deploy_string}"
