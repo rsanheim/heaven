@@ -1,7 +1,7 @@
-ruby "2.3.6"
+ruby "2.5.5"
 source "https://rubygems.org"
 
-gem "rails",    "~>4.2.2"
+gem "rails",    "~>4.2.8"
 gem "resque"
 gem "resque-lock-timeout"
 gem "octokit"
