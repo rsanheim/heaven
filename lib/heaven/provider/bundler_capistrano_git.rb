@@ -17,6 +17,9 @@ module Heaven
       def execute
         return execute_and_log(["/usr/bin/true"]) if Rails.env.test?
 
+        log_stdout "Beginning deployment for #{sha} - Heaven Version #{Heaven::VERSION}"
+        update_output
+
         unless File.exist?(checkout_directory)
           log "Cloning #{repository_url} into #{checkout_directory}"
           execute_and_log(["git", "clone", clone_url, checkout_directory])
