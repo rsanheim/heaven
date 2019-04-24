@@ -9,7 +9,7 @@ namespace :resque do
       logger.formatter = ::Logger::Formatter.new
 
       Resque.logger = ActiveSupport::TaggedLogging.new(logger)
-      Resque.logger.level = Logger::INFO
+      Resque.logger.level = Logger::WARN
       Resque.logger.info "event=resque_logger_initialized"
     end
   end
