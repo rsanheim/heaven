@@ -50,7 +50,7 @@ module Heaven
               execute_and_log(predeploy_cmd)
             end
 
-            bundler_string = ["bundle", "install", "--without", ignored_groups.join(" ")]
+            bundler_string = ["/usr/local/bin/bundle", "install", "--without", ignored_groups.join(" ")]
             log "Executing bundler: #{bundler_string.join(" ")}"
             execute_and_log(bundler_string)
             deploy_string = ["script/deploy", environment]
