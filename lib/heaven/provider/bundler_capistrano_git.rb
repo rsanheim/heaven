@@ -37,6 +37,8 @@ module Heaven
               ENV["TURNKEY_INSTANCE"] = turnkey_id
             end
 
+            execute_and_log(["gem", "install", "bundler:1.17.3"])
+
             if bundler_private_source.present? && bundler_private_credentials.present?
               bundler_config_string = ["bundle", "config", bundler_private_source, bundler_private_credentials]
               log "Adding bundler config"
