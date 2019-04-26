@@ -18,7 +18,7 @@ module Heaven
         return execute_and_log(["/usr/bin/true"]) if Rails.env.test?
 
         unless File.exist?(checkout_directory)
-          log "Cloning #{repository_url} into #{checkout_directory}"
+          log "Cloning #{repository_url} into #{checkout_directory} - Heaven #{Heaven::VERSION}"
           execute_and_log(["git", "clone", clone_url, checkout_directory])
         end
 
