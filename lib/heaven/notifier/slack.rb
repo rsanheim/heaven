@@ -35,7 +35,7 @@ module Heaven
         when "refresh_database"
           message << refresh_database_message
         else
-          puts "Unhandled deployment state, #{state}"
+          puts "Unhandled task, #{task}"
         end
       end
 
