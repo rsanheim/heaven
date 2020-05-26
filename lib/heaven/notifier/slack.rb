@@ -64,6 +64,7 @@ module Heaven
         case state
         when "success"
           message << "'s refresh of the #{repository_link} database in #{environment} is complete! :success:"
+          message << "You should re-deploy #{repository_link} to #{environment} to ensure the app is properly restarted."
         when "in_progress"
           message << "'s refresh of the #{repository_link} database in #{environment} is in progress (I really don't know how I'm delivering _this_ message)"
         when "failure"
