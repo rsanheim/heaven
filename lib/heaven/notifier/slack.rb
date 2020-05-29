@@ -29,6 +29,22 @@ module Heaven
       def default_message
         message = output_link("##{deployment_number}")
         message << " : #{user_link}"
+        case task
+        when "deploy"
+          message << deploy_message
+        when "refresh_database"
+          message << refresh_database_message
+        when "deploy:lock"
+          message = description
+        when "deploy:unlock"
+          message = description
+        else
+          puts "Unhandled task, #{task}"
+        end
+      end
+
+      def deploy_message
+        message = ""
         case state
         when "success"
           message << "'s #{environment} deployment of #{repository_link} is done! "
@@ -44,6 +60,25 @@ module Heaven
           message << " is deploying #{repository_link("/tree/#{ref}")} to #{environment} #{compare_link}"
         else
           puts "Unhandled deployment state, #{state}"
+        end
+      end
+
+      def refresh_database_message
+        message = ""
+        case state
+        when "success"
+          message << "'s refresh of the #{repository_link} database in #{environment} is complete! :success:"
+          message << "You should re-deploy #{repository_link} to #{environment} to ensure the app is properly restarted."
+        when "in_progress"
+          message << "'s refresh of the #{repository_link} database in #{environment} is in progress (I really don't know how I'm delivering _this_ message)"
+        when "failure"
+          message << "'s refresh of the #{repository_link} database in #{environment} has failed! #{ascii_face}"
+        when "error"
+          message << "'s refresh of the #{repository_link} database in #{environment} has errors. #{ascii_face}"
+        when "pending"
+          message << " is refreshing the #{repository_link} database in #{environment}"
+        else
+          puts "Unhandled database refresh state, #{state}"
         end
       end
 

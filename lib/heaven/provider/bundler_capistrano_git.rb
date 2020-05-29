@@ -14,6 +14,10 @@ module Heaven
         gem_executable_path("cap")
       end
 
+      def task
+        deployment_data["task"] || "deploy"
+      end
+
       def execute
         return execute_and_log(["/usr/bin/true"]) if Rails.env.test?
 
@@ -44,7 +48,7 @@ module Heaven
             bundler_string = ["bundle", "install", "--without", ignored_groups.join(" ")]
             log "Executing bundler: #{bundler_string.join(" ")}"
             execute_and_log(bundler_string)
-            deploy_string = ["script/deploy", environment]
+            deploy_string = ["script/#{task}", environment]
             log "Executing capistrano: #{deploy_string.join(" ")}"
             execute_and_log(deploy_string, "BRANCH" => ref)
           end
