@@ -34,7 +34,7 @@ module Heaven
           message << deploy_message
         when "refresh_database"
           message << refresh_database_message
-        when "deploy:lock"
+        when "deploy:lock" || "deploy:unlock"
           message = description
         else
           puts "Unhandled task, #{task}"
