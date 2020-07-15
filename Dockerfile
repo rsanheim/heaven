@@ -20,6 +20,7 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y yarn && \
     yarn global add expo-cli && \
+    apt-get install -y awscli && \
     rm -rf /var/lib/apt/lists/*
 
 COPY . $WORK_DIR
