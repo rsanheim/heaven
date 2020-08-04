@@ -190,7 +190,9 @@ module Heaven
       end
 
       def user_link
-        "[#{chat_user}](#{octokit_web_endpoint}#{chat_user})"
+        # don't create user_link if user is unknown
+        return "#{chat_user}" if ["unknown", "autodeploy"].include?chat_user
+        "[#{chat_user}](#{octokit_web_endpoint}#{chat_user})" 
       end
 
       def output_link(link_title = "deployment")
