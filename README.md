@@ -12,9 +12,25 @@ Heaven currently supports [Capistrano][15], [Fabric][10], and [Heroku][22] deplo
 * [Deployment Notifications](/doc/notifications.md)
 * [Environment Locking](/doc/locking.md)
 
-# Launch on Heroku
+## Making changes to our version of Heaven
 
-[![Launch on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+To make any changes to Heaven, you'll need Docker installed locally.
+
+First, make you changes to Heaven and open a pull request. Then:
+
+push your local changes to Docker:
+
+```(sh)
+cd heaven
+script/release
+```
+
+Then deploy the latest Docker image to our environment:
+
+```(sh)
+cd aws-deploy-brainy
+script/deploy production heaven -t heaven
+```
 
 [1]: http://developer.github.com/v3/repos/deployments/
 [2]: https://github.com/blog/1778-webhooks-level-up
