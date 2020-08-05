@@ -28,7 +28,7 @@ module Heaven
 
       def default_message
         message = output_link("##{deployment_number}")
-        message << " : #{user_link}"
+        message << " : #{chat_user}"
         case task
         when "deploy"
           message << deploy_message

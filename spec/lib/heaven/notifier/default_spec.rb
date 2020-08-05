@@ -6,35 +6,33 @@ describe "Heaven::Notifier::Default" do
       data = {
         "deployment" => {
           "payload" => {
-            "notify" => {
-              "user_name" => "sarahconnor"
-            }
+            "actor" => "sarahconnor"
           }
         }
       }
+      
       notifier = Heaven::Notifier::Default.new(data)
       expect(notifier.chat_user).to eq("sarahconnor")
     end
 
-    context "unkown chat user" do
-      it "returns unknown chat user if payload is empty" do
-        data = { "deployment" => {
-          "payload" => {}
-          }
+    it "returns unknown chat user if payload is empty" do
+      data = { "deployment" => {
+        "payload" => {}
         }
-        notifier = Heaven::Notifier::Default.new(data)
-        expect(notifier.chat_user).to eq("unknown")
-      end
+      }
+      notifier = Heaven::Notifier::Default.new(data)
+      expect(notifier.chat_user).to eq("unknown")
+    end
+  end
 
-      it "does not generate a user_link if user is unknown or 'autodeploy'" do
-        data = { "state" => "success",
-          "deployment" => {
-          "payload" => {}
-          }
+  context "user_link" do
+    it "does not generate a user_link if user is 'unknown'" do
+      data = { "deployment" => {
+        "payload" => {}
         }
-        notifier = Heaven::Notifier::Default.new(data)
-        expect(notifier.user_link).to eq("unknown")
-      end
+      }
+      notifier = Heaven::Notifier::Default.new(data)
+      expect(notifier.user_link).to eq("unknown")
     end
   end
 

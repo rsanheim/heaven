@@ -8,6 +8,7 @@
     "payload": {
       "name": "example-repo",
       "hosts": "",
+      "actor": "atmos",
       "notify": {
         "room": "example:room",
         "user": "Mumakil",

@@ -105,8 +105,7 @@ module Heaven
       end
 
       def chat_user
-        return "unknown" unless deployment_payload["notify"]
-        deployment_payload["notify"]["user_name"] || deployment_payload["notify"]["user"] || "unknown"
+        deployment_payload["actor"] || "unknown"
       end
 
       def chat_room
@@ -191,7 +190,7 @@ module Heaven
 
       def user_link
         # don't create user_link if user is unknown
-        return "#{chat_user}" if ["unknown", "autodeploy"].include?chat_user
+        return "#{chat_user}" if chat_user == "unknown"
         "[#{chat_user}](#{octokit_web_endpoint}#{chat_user})" 
       end
 
