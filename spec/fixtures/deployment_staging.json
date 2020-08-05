@@ -8,6 +8,7 @@
     "payload": {
       "name": "heaven",
       "hosts": "",
+      "actor": "atmos",
       "notify": {
         "room": "ops",
         "user": "atmos",
