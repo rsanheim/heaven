@@ -24,7 +24,7 @@ module Heaven
     logger.formatter = ::Logger::Formatter.new
 
     config.logger = ActiveSupport::TaggedLogging.new(logger)
-    config.log_level = ENV["HEAVEN_LOG_LEVEL"] || :info
+    config.log_level = ENV["HEAVEN_LOG_LEVEL"] || :debug
 
     config.serve_static_files = true
     config.action_dispatch.x_sendfile_header = nil
