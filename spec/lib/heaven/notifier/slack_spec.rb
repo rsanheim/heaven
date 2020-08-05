@@ -17,8 +17,8 @@ describe "Heaven::Notifier::Slack" do
 
     data = decoded_fixture_data("deployment-pending")
 
-    n = Heaven::Notifier::Slack.new(data)
-    n.comparison = {
+    notifier = Heaven::Notifier::Slack.new(data)
+    notifier.comparison = {
       "html_url" => "https://github.com/org/repo/compare/sha...sha"
     }
 
@@ -29,13 +29,13 @@ describe "Heaven::Notifier::Slack" do
       "to production ([compare](https://github.com/org/repo/compare/sha...sha))"
     ]
     
-    expect(n.default_message).to eql result.join("")
+    expect(notifier.default_message).to eql result.join("")
   end
 
-  xit "handles successful deployment statuses" do
+  it "handles successful deployment statuses" do
     data = decoded_fixture_data("deployment-success")
 
-    n = Heaven::Notifier::Slack.new(data)
+    notifier = Heaven::Notifier::Slack.new(data)
 
     result = [
       "[#11627](https://gist.github.com/fa77d9fb1fe41c3bb3a3ffb2c) ",
@@ -43,13 +43,13 @@ describe "Heaven::Notifier::Slack" do
       "[my-robot](https://github.com/atmos/my-robot) ",
       "is done! "
     ]
-    expect(n.default_message).to eql result.join("")
+    expect(notifier.default_message).to eql result.join("")
   end
 
-  xit "handles failure deployment statuses" do
+  it "handles failure deployment statuses" do
     data = decoded_fixture_data("deployment-failure")
 
-    n = Heaven::Notifier::Slack.new(data)
+    notifier = Heaven::Notifier::Slack.new(data)
 
     result = [
       "[#123456](https://gist.github.com/fa77d9fb1fe41c3bb3a3ffb2c) ",
@@ -57,6 +57,6 @@ describe "Heaven::Notifier::Slack" do
       "[my-robot](https://github.com/atmos/my-robot) ",
       "failed. "
     ]
-    expect(n.default_message).to eql result.join("")
+    expect(notifier.default_message).to eql result.join("")
   end
 end

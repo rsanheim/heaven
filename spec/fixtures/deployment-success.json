@@ -6,9 +6,9 @@
     "id": 11627,
     "sha": "daf81923c94f7513ac840fa4fcc0dfcc11f32f74",
     "ref": "break-up-notifiers",
+    "task": "deploy",
     "payload": {
       "name": "my-robot",
-      "task": "deploy",
       "hosts": "",
       "actor": "atmos",
       "notify": {
