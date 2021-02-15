@@ -1,0 +1,41 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.5.5
+      - image: redis
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: gem install bundler:1.17.3
+      - restore_cache:
+          keys:
+          - v2-dependencies-{{ checksum "Gemfile.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v2-dependencies-
+      - run:
+          name: install dependencies
+          working_directory: ~/repo/heaven
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+      - save_cache:
+          paths:
+            - ./heaven/vendor/bundle
+          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
+
+      - run: dockerize -wait tcp://localhost:6379 -timeout 1m
+      - run:
+          name: run tests
+          working_directory: ~/repo
+          command: |
+            mkdir /tmp/test-results
+            cd heaven
+            bundle exec rake
+
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test
