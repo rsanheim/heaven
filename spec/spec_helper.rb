@@ -34,7 +34,7 @@ RSpec.configure do |config|
   end
 
   config.around do |example|
-    original = Heaven.redis.client.db
+    original = Heaven.redis._client.db
     Heaven.redis.select(15)
     example.run
     Heaven.redis.flushall

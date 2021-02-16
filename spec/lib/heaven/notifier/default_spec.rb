@@ -45,6 +45,6 @@ describe "Heaven::Notifier::Default" do
 
     notifier = Heaven::Notifier::Default.new("{}")
 
-    expect(notifier.change_delivery_enabled?).to be_true
+    expect(notifier.change_delivery_enabled?).to eq(true)
   end
 end
