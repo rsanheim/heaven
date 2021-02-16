@@ -28,5 +28,7 @@ module Heaven
 
     config.serve_static_files = true
     config.action_dispatch.x_sendfile_header = nil
+
+    config.active_record.sqlite3.represent_boolean_as_integer = true
   end
 end

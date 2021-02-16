@@ -1,7 +1,7 @@
 ruby "2.7.2"
 source "https://rubygems.org"
 
-gem "rails", "6.0.3.3"
+gem "rails", "~> 5.1"
 gem "resque"
 gem "resque-lock-timeout"
 gem "octokit"
@@ -11,6 +11,7 @@ gem "posix-spawn"
 gem "warden-github-rails"
 gem "faraday"
 gem "faraday_middleware"
+gem "uglifier"
 
 # Providers
 gem "dpl"
