@@ -30,13 +30,6 @@ module DeploymentStatusHelper
 
   def stub_deploy_statuses
     allow_any_instance_of(Octokit::Client).to receive(:create_gist).and_return(Octokit::Gist.new("deadbeef"))
-    #deployment_results = {
-    #  :body => StubDeployment.new("atmos/my-robot", 721).to_json,
-    #  :status => 200,
-    #  :headers => {}
-    #}
-    #stub_request(:get, deployment_url)
-    #  .to_return(deployment_results)
 
     extra_params = {
       "target_url"  => "https://gist.github.com/cd520d99c3087f2d18b4",
