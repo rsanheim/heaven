@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 describe "Heaven::Notifier::Flowdock" do
   include FixtureHelper

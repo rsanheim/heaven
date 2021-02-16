@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 describe "Heaven::Notifier::Default" do
   context "chat_user" do
@@ -26,7 +26,7 @@ describe "Heaven::Notifier::Default" do
   end
 
   context "user_link" do
-    it "does not generate a user_link if user is 'unknown'" do
+    it "does not generate a user_link if user is 'unknown'", :vcr do
       data = { "deployment" => {
         "payload" => {}
         }
@@ -39,12 +39,12 @@ describe "Heaven::Notifier::Default" do
   it "does not deliver changes unless an environment opt-in is present" do
     notifier = Heaven::Notifier::Default.new("{}")
 
-    expect(notifier.change_delivery_enabled?).to be_false
+    expect(notifier.change_delivery_enabled?).to eq(false)
 
     ENV["HEAVEN_NOTIFIER_DISPLAY_COMMITS"] = "true"
 
     notifier = Heaven::Notifier::Default.new("{}")
 
-    expect(notifier.change_delivery_enabled?).to be_true
+    expect(notifier.change_delivery_enabled?).to eq(true)
   end
 end

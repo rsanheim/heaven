@@ -2,8 +2,8 @@
 class EventsController < ApplicationController
   include WebhookValidations
 
-  before_filter :verify_incoming_webhook_address!
-  skip_before_filter :verify_authenticity_token, :only => [:create]
+  before_action :verify_incoming_webhook_address!
+  skip_before_action :verify_authenticity_token, :only => [:create]
 
   def create
     event    = request.headers["HTTP_X_GITHUB_EVENT"]
