@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 describe Deployment::Credentials do
   it "correctly sets up the environment" do

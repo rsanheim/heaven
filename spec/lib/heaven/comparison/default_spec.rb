@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 require "heaven/comparison/default"
 require "support/helpers/comparison_helper"
 

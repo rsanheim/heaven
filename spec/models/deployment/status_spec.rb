@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 describe Deployment::Status do
   it "knows whether or not it completed" do

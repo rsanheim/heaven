@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 describe WebhookValidations do
   include MetaHelper
@@ -23,7 +23,7 @@ describe WebhookValidations do
     end
   end
 
-  it "makes methods available" do
+  it "makes methods available", :vcr do
     klass = WebhookValidationsTester.new("192.30.252.41")
     expect(klass).to be_valid_incoming_webhook_address
     klass = WebhookValidationsTester.new("127.0.0.1")

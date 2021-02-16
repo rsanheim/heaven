@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 describe "Visiting in a browser" do
   describe "GET /" do

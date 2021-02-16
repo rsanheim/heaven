@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 describe "app.json config for heroku" do
   it "doesn't blow up parsing" do

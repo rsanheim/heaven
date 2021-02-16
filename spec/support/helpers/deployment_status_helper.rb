@@ -29,13 +29,14 @@ module DeploymentStatusHelper
   end
 
   def stub_deploy_statuses
-    deployment_results = {
-      :body => StubDeployment.new("atmos/my-robot", 721),
-      :status => 200,
-      :headers => {}
-    }
-    stub_request(:get, deployment_url)
-      .to_return(deployment_results)
+    allow_any_instance_of(Octokit::Client).to receive(:create_gist).and_return(Octokit::Gist.new("deadbeef"))
+    #deployment_results = {
+    #  :body => StubDeployment.new("atmos/my-robot", 721).to_json,
+    #  :status => 200,
+    #  :headers => {}
+    #}
+    #stub_request(:get, deployment_url)
+    #  .to_return(deployment_results)
 
     extra_params = {
       "target_url"  => "https://gist.github.com/cd520d99c3087f2d18b4",
@@ -44,15 +45,15 @@ module DeploymentStatusHelper
 
     stub_request(:post, deployment_url("/statuses"))
       .with(:body => extra_params.merge("state" => "pending").to_json)
-      .to_return(:status => 201, :body => {}, :headers => {})
+      .to_return(:status => 201, :body => "{}", :headers => {})
 
     stub_request(:post, deployment_url("/statuses"))
       .with(:body => extra_params.merge("state" => "failure").to_json)
-      .to_return(:status => 201, :body => {}, :headers => {})
+      .to_return(:status => 201, :body => "{}", :headers => {})
 
     stub_request(:post, deployment_url("/statuses"))
       .with(:body => extra_params.merge("state" => "success").to_json)
-      .to_return(:status => 201, :body => {}, :headers => {})
+      .to_return(:status => 201, :body => "{}", :headers => {})
   end
 
   ::RSpec.configure do |config|

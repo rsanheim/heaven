@@ -1,26 +1,4 @@
-# This file is copied to spec/ when you run 'rails generate rspec:install'
-require "securerandom"
-ENV["RAILS_ENV"] ||= "test"
-ENV["RAILS_SECRET_KEY_BASE"] ||= SecureRandom.hex
-
-require File.expand_path("../../config/environment", __FILE__)
-require "simplecov"
-SimpleCov.start "rails"
-
-require "rspec/rails"
-require "rspec/autorun"
-require "webmock/rspec"
-
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
-
-ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
-
-ENV["DEPLOYMENT_PRIVATE_KEY"] = "private\nkey\n"
-
 RSpec.configure do |config|
-  config.include GistHelper
-  config.include DeploymentStatusHelper
-
   config.order = "random"
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true
@@ -41,5 +19,3 @@ RSpec.configure do |config|
     Heaven.redis.select(original)
   end
 end
-
-Heaven.testing = true

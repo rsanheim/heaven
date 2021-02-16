@@ -30,9 +30,11 @@ group :test do
   gem "simplecov"
   gem "rubocop"
   gem "rspec-rails"
+  gem "vcr"
 end
 
-group :development do
+group :development do 
+  gem "guard-rspec"
   gem "foreman"
   gem "meta_request"
   gem "better_errors"

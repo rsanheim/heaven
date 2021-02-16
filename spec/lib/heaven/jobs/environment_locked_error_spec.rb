@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 describe Heaven::Jobs::EnvironmentLockedError do
   include Deployment::Status::Matchers,
