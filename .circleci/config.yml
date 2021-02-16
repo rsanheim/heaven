@@ -32,7 +32,7 @@ jobs:
           command: |
             mkdir /tmp/test-results
             cd heaven
-            rails db:migrate RAILS_ENV=test
+            bundle exec rails db:migrate RAILS_ENV=test
             bundle exec rake
 
       - store_test_results:
