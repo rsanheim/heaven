@@ -10,6 +10,7 @@ RUN mkdir -p $WORK_DIR
 
 COPY Gemfile $WORK_DIR/Gemfile
 COPY Gemfile.lock $WORK_DIR/Gemfile.lock
+RUN gem install bundler -v '1.17.3'
 RUN cd $WORK_DIR && bundle install
 
 RUN apt-get update && \
