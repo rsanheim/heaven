@@ -11,7 +11,6 @@ gem "posix-spawn"
 gem "warden-github-rails"
 gem "faraday"
 gem "faraday_middleware"
-gem "uglifier"
 
 # Providers
 gem "dpl"
