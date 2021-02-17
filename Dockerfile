@@ -12,6 +12,7 @@ COPY Gemfile $WORK_DIR/Gemfile
 COPY Gemfile.lock $WORK_DIR/Gemfile.lock
 RUN gem install bundler -v '1.17.3'
 RUN cd $WORK_DIR && bundle install
+RUN bin/rails db:environment:set RAILS_ENV=production
 
 RUN apt-get update && \
     apt-get install -y apt-transport-https && \
