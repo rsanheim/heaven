@@ -13,7 +13,6 @@ COPY Gemfile.lock $WORK_DIR/Gemfile.lock
 RUN gem install bundler -v '1.17.3'
 RUN cd $WORK_DIR && bundle install
 
-
 RUN apt-get update && \
     apt-get install -y apt-transport-https && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
@@ -28,7 +27,6 @@ RUN apt-get update && \
 COPY . $WORK_DIR
 
 WORKDIR $WORK_DIR
-RUN bundle exec rails db:environment:set RAILS_ENV=production
 EXPOSE 80
 
 ENTRYPOINT ["bundle", "exec"]
