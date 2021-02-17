@@ -10,7 +10,7 @@
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
 if Rails.env.development?
-  Heaven::Application.config.secret_key_base = '8d788e2c-b4b4-4013-9909-1364d53d0aa2'
+  Rails.application.secrets.secret_key_base = '8d788e2c-b4b4-4013-9909-1364d53d0aa2'
 else
-  Heaven::Application.config.secret_key_base = ENV['RAILS_SECRET_KEY_BASE']
+  Rails.application.secrets.secret_key_base = ENV['SECRET_KEY_BASE']
 end
