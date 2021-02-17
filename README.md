@@ -16,21 +16,29 @@ Heaven currently supports [Capistrano][15], [Fabric][10], and [Heroku][22] deplo
 
 To make any changes to Heaven, you'll need Docker installed locally.
 
-First, make you changes to Heaven and open a pull request.
-Make sure your CircleCI build is green.
-Build the new docker image locally in your branch to make sure it works:
-`Docker build .`
-Merge your PR to master.
+### Adding rails masterkey
 
-Then:
-push your local changes to Docker registry using the release script:
+With the change to rails 5, in order to successfully build a docker image, you will need to add a rails masterkey locally. This will only need to be done once.
+
+1. Grab the Heaven rails masterkey from our shared 1password Infra vault
+2. run `EDITOR="vim" bin/rails credentials:edit` to edit the master key file and paste in the masterkey you copied from the vault.
+
+### Next steps for making changes
+
+1. make your changes to Heaven and open a pull request.
+2. Make sure your CircleCI build is green.
+3. Build the new docker image locally in your branch to make sure it works:
+`Docker build .`
+4. Merge your PR to master.
+5. Checkout master and pull.
+6. Push your changes to Docker registry using the release script:
 
 ```(sh)
 cd heaven
 script/release
 ```
 
-Then deploy the latest Docker image to our environment:
+7. Then deploy the latest Docker image to our environment:
 
 ```(sh)
 cd aws-deploy-brainy
