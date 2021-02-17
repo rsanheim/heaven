@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 describe Deployment::Credentials do
   it "correctly sets up the environment" do
@@ -6,8 +6,8 @@ describe Deployment::Credentials do
     credentials = Deployment::Credentials.new(root)
 
     expect { credentials.setup! }.to_not raise_error
-    expect(File.exist?("#{root}/.netrc")).to be_true
-    expect(File.exist?("#{root}/.ssh/config")).to be_true
-    expect(File.exist?("#{root}/.ssh/id_rsa")).to be_true
+    expect(File.exist?("#{root}/.netrc")).to eq(true)
+    expect(File.exist?("#{root}/.ssh/config")).to eq(true)
+    expect(File.exist?("#{root}/.ssh/id_rsa")).to eq(true)
   end
 end

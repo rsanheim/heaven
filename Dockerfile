@@ -1,4 +1,4 @@
-FROM ruby:2.5.5
+FROM ruby:2.7.2
 LABEL maintainer="First <developer@first.io>"
 
 RUN mkdir -p /root/.ssh
@@ -10,7 +10,9 @@ RUN mkdir -p $WORK_DIR
 
 COPY Gemfile $WORK_DIR/Gemfile
 COPY Gemfile.lock $WORK_DIR/Gemfile.lock
+RUN gem install bundler -v '1.17.3'
 RUN cd $WORK_DIR && bundle install
+
 
 RUN apt-get update && \
     apt-get install -y apt-transport-https && \
@@ -26,6 +28,7 @@ RUN apt-get update && \
 COPY . $WORK_DIR
 
 WORKDIR $WORK_DIR
+RUN bundle exec rails db:environment:set RAILS_ENV=production
 EXPOSE 80
 
 ENTRYPOINT ["bundle", "exec"]

@@ -1,4 +1,4 @@
-class CreateDeployments < ActiveRecord::Migration
+class CreateDeployments < ActiveRecord::Migration[4.2]
   def change
     create_table :deployments do |t|
       t.text   :custom_payload

@@ -16,9 +16,14 @@ Heaven currently supports [Capistrano][15], [Fabric][10], and [Heroku][22] deplo
 
 To make any changes to Heaven, you'll need Docker installed locally.
 
-First, make you changes to Heaven and open a pull request. Then:
+First, make you changes to Heaven and open a pull request.
+Make sure your CircleCI build is green.
+Build the new docker image locally in your branch to make sure it works:
+`Docker build .`
+Merge your PR to master.
 
-push your local changes to Docker:
+Then:
+push your local changes to Docker registry using the release script:
 
 ```(sh)
 cd heaven
