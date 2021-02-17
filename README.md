@@ -20,7 +20,7 @@ To make any changes to Heaven, you'll need Docker installed locally.
 
 With the change to rails 5, in order to successfully build a docker image, you will need to add a rails masterkey locally. This will only need to be done once.
 
-1. Grab the Heaven rails masterkey from our shared 1password vault
+1. Grab the Heaven rails masterkey from our shared 1password Infra vault
 2. run `EDITOR="vim" bin/rails credentials:edit` to edit the master key file and paste in the masterkey you copied from the vault.
 
 ### Next steps for making changes
